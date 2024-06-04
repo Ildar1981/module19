@@ -38,7 +38,7 @@ console.log(emptyObject);
 с данным именем. Функция должна возвращать true или false.
 */
 function checkPropertyExists(propertyName, obj) {
-    return obj.hasOwnProperty(propertyName);
+    return propertyName in obj;
 }
 
 const sampleObject = {
@@ -68,6 +68,7 @@ const person = {
 };
 
 showOwnProperties(person);
+
 function ElectricalDevice(name, power) {
     this.name = name;
     this.power = power;
@@ -119,3 +120,46 @@ computer.switchOn();
 
 let totalPower = deskLamp.power + computer.power;
 console.log(`Общая потребляемая мощность: ${totalPower} Вт`);
+
+//5 задание
+class ElectricalDevice {
+    constructor(name, power) {
+        this.name = name;
+        this.power = power;
+        this.pluggedIn = false;
+    }
+
+    switchOn() {
+        this.pluggedIn = true;
+        console.log(`${this.name} включен в розетку.`);
+    }
+
+    switchOff() {
+        this.pluggedIn = false;
+        console.log(`${this.name} выключен из розетки.`);
+    }
+}
+
+class DeskLamp extends ElectricalDevice {
+    constructor(name, power, brightness) {
+        super(name, power);
+        this.brightness = brightness;
+    }
+
+    adjustBrightness(newBrightness) {
+        this.brightness = newBrightness;
+        console.log(`${this.name}: яркость установлена на ${newBrightness}.`);
+    }
+}
+
+class Computer extends ElectricalDevice {
+    constructor(name, power, brand) {
+        super(name, power);
+        this.brand = brand;
+    }
+
+    checkEmails() {
+        console.log(`${this.brand} компьютер ${this.name}: Проверка почты...`);
+    }
+}
+
